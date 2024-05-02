@@ -1,0 +1,44 @@
+@startuml
+'Qusto è un commento
+
+package GeometryLibrary <<Folder>> 
+'Indica come visualizzare il namespace
+{
+'Per creare una classe:
+class Triangle
+{
++ Vertices : Matrix3d
++ Triangle(Vertices) 'costruttore
++ double computeArea()
+}
+
+'Creo una classe che permette di modellizare la lista di poligoni
+class Polygons
+{
++ Vertices : MAtrixXd
++ listPolygons : vector<vector<unsigned int>>
++ vector<vector<vector<unsigned int>>> computeTriangulation()
++ vector<double> computeArea()
++ void gedimInterface(<vector<vector<unsigned int>>&)
+'Posso anche indicare le funzioni che non fanno parte della classe ma che vengono utilizzate
+..Non member function..
+void importPolygons(path, Polygons)
+..TEST POLYGONS..
+TESTCOMPUTEAREA
+TESTTRIANGULATION
+}
+
+}
+
+package Gedim <<Frame>>
+{
+
+}
+
+note "Getim is an external library" as GedimN
+GedimN .. Gedim
+Gedim ..> Polygons::gedimInterface
+' ..> indica come mettere la freccia
+
+Triangle "many" --o "1" Polygons: is made up
+@enduml
